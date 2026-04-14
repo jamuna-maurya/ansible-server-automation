@@ -1,0 +1,26 @@
+---
+- name: Configure server using Ansible
+  hosts: servers
+  become: yes   # ✅ IMPORTANT (adds sudo)
+
+  tasks:
+
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Install git
+      apt:
+        name: git
+        state: present
